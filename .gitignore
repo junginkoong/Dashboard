@@ -1,0 +1,31 @@
+# === Python / Django ===
+venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+
+# Ignore compiled and cache files
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Environment & settings
+.env
+*.env
+*.secret
+*.token
+
+# Static and media files 
+staticfiles/
+media/
+
+# Django migrations
+**/migrations/
+!*/migrations/__init__.py
+
+# VS Code or other IDE/editor files
+.vscode/
+*.swp
+.DS_Store
