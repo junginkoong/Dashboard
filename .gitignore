@@ -1,3 +1,19 @@
+# === React / JavaScript ===
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+package-lock.json
+
+
 # === Python / Django ===
 venv/
 __pycache__/
@@ -26,6 +42,13 @@ media/
 !*/migrations/__init__.py
 
 # VS Code or other IDE/editor files
-.vscode/
 *.swp
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
