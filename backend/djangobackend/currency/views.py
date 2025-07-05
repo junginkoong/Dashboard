@@ -2,7 +2,6 @@ from django.shortcuts import render
 import requests
 from datetime import datetime, timedelta
 from django.http import JsonResponse
-from django.http import HttpResponse
 
 ALLOWED_CURRENCIES = ['CAD', 'USD', 'EUR']
 DEFAULT_BASE_CURRENCY = 'USD'
