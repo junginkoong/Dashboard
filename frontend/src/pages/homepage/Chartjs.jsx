@@ -96,7 +96,7 @@ export default function Chartjs() {
                     />
                 </div>
             </div>
-            <div style={{ width: '70vw', height: '500px' }}>
+            <div style={{ width: '73vw', height: '500px' }}>
                 {chartData && <Line datasetIdKey='id' data={chartData} options={OPTIONS}/>}
             </div>
         </div>

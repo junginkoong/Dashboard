@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Homepage from './pages/homepage/Homepage'
+import Header from './utils/Header'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div>
-      <Homepage />
-    </div>
+    <>
+      <Header/>
+      <div style={{maxWidth: "1280px", margin: "0 auto", padding: "2rem", textAlign: "center"}}>
+        <Homepage />
+      </div>
+    </>
   )
 }
 
