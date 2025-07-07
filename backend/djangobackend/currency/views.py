@@ -12,6 +12,7 @@ YEAR_RANGE = 2
 def get_exchange_rate(request):
     # Base & Reverse Flag from URL
     base = request.GET.get('base', DEFAULT_BASE_CURRENCY).upper()
+    target = request.GET.get('target', '').upper()
     # reversed_flag = request.GET.get('reversed', 'False')
 
     # Validate base currency
@@ -22,7 +23,10 @@ def get_exchange_rate(request):
     start_date = datetime.today().date()- timedelta(days=365*YEAR_RANGE)
 
     # Symbols 
-    symbols_param = ','.join([c for c in ALLOWED_CURRENCIES if c != base])
+    if len(target) > 0:
+        symbols_param = target
+    else:
+        symbols_param = ','.join([c for c in ALLOWED_CURRENCIES if c != base])
 
     # Build API URL
     url = (

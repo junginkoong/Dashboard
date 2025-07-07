@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto'
 import { Chart } from 'react-chartjs-2'
 import getExchangeRate from "../../utils/api";
-import response_parse_chartjs from "../../utils/response_parse"
+import { response_parse_chartjs } from "../../utils/response_parse"
 
 const SYMBOLS = ["USD", "CAD", "EUR"]
 const OPTIONS = 
@@ -47,7 +47,6 @@ export default function Chartjs() {
     }
 
     const handleCurrencyChange = (e) => {
-        console.log("inside handle")
         let symbols = SYMBOLS.filter(symbol => symbol != e.target.value)
         setChartBase(e.target.value);
         setChartSymbols(symbols)
@@ -61,7 +60,7 @@ export default function Chartjs() {
     }
 
     useEffect(() => {
-        fetchChartData("USD", ["CAD", "EUR"], false)
+        fetchChartData(chartBase, chartSymbols, false)
     }, []);
 
     return (

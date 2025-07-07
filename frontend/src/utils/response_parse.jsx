@@ -1,6 +1,4 @@
-function response_parse_chartjs(data, symbols, isReversed){
-    console.log("inside response parse", isReversed)
-    console.log(symbols)
+export function response_parse_chartjs(data, symbols, isReversed){
     let formatted_data = {}
     let labels = []
     let dataset1 = []
@@ -44,5 +42,15 @@ function response_parse_chartjs(data, symbols, isReversed){
 
     return formatted_data
 }
+// {date: {target: rate}, ...}
+export function response_parse_table(data, base, isReversed){
+    let formatted_data = []
 
-export default response_parse_chartjs
+    Object.entries(data).map(([date, rates]) => {
+        Object.entries(rates).map(([target, rate]) => {
+            formatted_data.push({base: base, target: target, date: date, rate: isReversed ? (1 / rate).toFixed(5) : rate})
+        })
+    })
+
+    return formatted_data
+}
