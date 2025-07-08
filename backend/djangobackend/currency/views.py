@@ -2,6 +2,15 @@ from django.shortcuts import render
 import requests
 from datetime import datetime, timedelta
 from django.http import JsonResponse
+from redis_client import redis_client
+
+def connection():
+    return redis.Redis(
+        host='localhost',
+        port=6379,
+        db=0,
+        decode_responses=True
+    )
 
 ALLOWED_CURRENCIES = ['CAD', 'USD', 'EUR']
 DEFAULT_BASE_CURRENCY = 'USD'
@@ -40,3 +49,25 @@ def get_exchange_rate(request):
         return JsonResponse(data)
     except requests.RequestException as e:
         return JsonResponse({'error': 'Failed to fetch exchange rates', 'details': str(e)}, status=500)
+    
+
+
+
+def get_exchange_rate_redis(request):
+    response = []
+     # Base & Reverse Flag from URL
+    base = request.GET.get('base', DEFAULT_BASE_CURRENCY).upper()
+    target = request.GET.get('target', '').upper()
+    # reversed_flag = request.GET.get('reversed', 'False')
+
+    # Validate base currency
+    if base not in ALLOWED_CURRENCIES:
+        return JsonResponse({'error': 'Invalid base currency'}, status=400)
+    
+    symbol_param = [c for c in ALLOWED_CURRENCIES if c != base]
+
+    for target in symbol_param:
+        for key in redis_client.scan_iter(f"historical_exchange_rate:{base}:{target}:*"):
+            response.append(redis_client.hgetall(key))
+
+    return JsonResponse(response)

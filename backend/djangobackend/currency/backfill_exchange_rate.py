@@ -1,17 +1,9 @@
-import redis
 import requests
 from datetime import datetime, timedelta
 from django.http import JsonResponse
+from redis_client import redis_client
 
 YEAR_RANGE = 2 # For monthly backfill, just got it change this value
-
-def connection():
-    return redis.Redis(
-        host='localhost',
-        port=6379,
-        db=0,
-        decode_responses=True
-    )
 
 def format_raw_data(record, base):
     output = []
@@ -56,7 +48,6 @@ def load_data():
     return backfill_data
 
 def main():
-    redis_client = connection()
     records = load_data()
     bulk_insert_exchange_rates(redis_client, records)
 
