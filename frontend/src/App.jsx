@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Header/>
-      <div style={{maxWidth: "1280px", margin: "0 auto", padding: "2rem", textAlign: "center"}}>
+      <div style={{maxWidth: "100vw", padding: "2rem", textAlign: "center"}}>
         <Homepage />
       </div>
     </>

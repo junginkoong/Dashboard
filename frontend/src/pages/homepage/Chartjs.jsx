@@ -30,7 +30,7 @@ const OPTIONS =
         }
     },
     maintainAspectRatio: false
-};
+}
 
 export default function Chartjs() {
     const [chartData, setChartData] = useState(null)
@@ -42,8 +42,8 @@ export default function Chartjs() {
         getExchangeRate(base)
             .then((data) => { setChartData(response_parse_chartjs(data, symbols, reversed)) })
             .catch((error) => {
-                console.error("Error fetching exchange rate:", error);
-            });
+                console.error("Error fetching exchange rate:", error)
+            })
     }
 
     const handleCurrencyChange = (e) => {
@@ -61,7 +61,7 @@ export default function Chartjs() {
 
     useEffect(() => {
         fetchChartData(chartBase, chartSymbols, false)
-    }, []);
+    }, [])
 
     return (
         <div>
@@ -78,7 +78,7 @@ export default function Chartjs() {
                         style={{
                             padding: '0.4rem',
                             borderRadius: '6px',
-                            border: '1px solid #ccc',
+                            border: '1px solid lightgray',
                             fontSize: '1rem',
                         }}
                         >
@@ -96,7 +96,7 @@ export default function Chartjs() {
                     />
                 </div>
             </div>
-            <div style={{ width: '73vw', height: '500px' }}>
+            <div style={{ width: '65vw', height: '500px' }}>
                 {chartData && <Line datasetIdKey='id' data={chartData} options={OPTIONS}/>}
             </div>
         </div>

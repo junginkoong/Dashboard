@@ -4,7 +4,7 @@ import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import getExchangeRate from "../../utils/api";
 import { response_parse_table } from '../../utils/response_parse';
 
-ModuleRegistry.registerModules([AllCommunityModule]);
+ModuleRegistry.registerModules([AllCommunityModule])
 
 const SYMBOLS = ["USD", "CAD", "EUR"]
 const colDefs = [
@@ -25,8 +25,8 @@ export default function Table() {
         getExchangeRate(base)
             .then((data) => { setTableData(response_parse_table(data, base, isReversed)) })
             .catch((error) => {
-                console.error("Error fetching exchange rate:", error);
-            });
+                console.error("Error fetching exchange rate:", error)
+            })
     }
 
     const handleCurrencyChange = (e) => {
@@ -47,25 +47,31 @@ export default function Table() {
     const onFilterChanged = () => {
         if (gridApi) {
             const filters = gridApi.getFilterModel();
-            localStorage.setItem('gridFilters', JSON.stringify(filters));
+            localStorage.setItem('gridFilters', JSON.stringify(filters))
         }
-    };
+    }
 
     const onGridReady = (params) => {
-        const localFilters = localStorage.getItem('gridFilters');
+        const localFilters = localStorage.getItem('gridFilters')
         if (localFilters) {
-            const filters = JSON.parse(localFilters);
-            params.api.setFilterModel(filters);
+            const filters = JSON.parse(localFilters)
+            params.api.setFilterModel(filters)
         }
-        setGridApi(params.api);
-    };
+        setGridApi(params.api)
+    }
+
+    const clearLocalStore = () => {
+        localStorage.setItem('gridFilters', null)
+        gridApi.setFilterModel(null)
+        gridApi.onFilterChanged()
+    }
 
     useEffect(() => {
         fetchTableData(tableBase)
-    }, []);
+    }, [])
 
     return (
-        <div style={{ height: 500, paddingTop: "150px", paddingBottom: "150px" }}>
+        <div style={{ height: 500, }}>
             <h2 style={{ marginBottom: '1rem' }}>Exchange Currency Table</h2>
             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', alignItems: 'center' }}>
                 <div>
@@ -79,7 +85,7 @@ export default function Table() {
                         style={{
                             padding: '0.4rem',
                             borderRadius: '6px',
-                            border: '1px solid #ccc',
+                            border: '1px solid lightgray',
                             fontSize: '1rem',
                         }}
                         >
@@ -109,6 +115,21 @@ export default function Table() {
                 onGridReady={onGridReady}
                 onFilterChanged={onFilterChanged}
             />}
+            <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem', marginTop: '0.5rem' }}>
+                <button
+                    style={{
+                        padding: '0.4rem',
+                        borderRadius: '6px',
+                        border: '1px solid lightgray',
+                        fontSize: '0.8rem',
+                        backgroundColor: 'lightgray',
+
+                    }}
+                    onClick={() => clearLocalStore()}
+                > 
+                    Clear Filters
+                </button>
+            </div>
         </div>
     )
 }
