@@ -71,7 +71,7 @@ export default function Table() {
     }, [])
 
     return (
-        <div style={{ height: 500, }}>
+        <div style={{ height: 800, }}>
             <h2 style={{ marginBottom: '1rem' }}>Exchange Currency Table</h2>
             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', alignItems: 'center' }}>
                 <div>

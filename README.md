@@ -15,7 +15,7 @@ API call := If we had access to the database, we would create a script to backfi
             can run monthly or daily to keep the database up-to-date
 
 Database := Non relational database would be best. There are no complex queries needed, and no strong links between tables
-            required. Maybe Reddis might be best since it utalizes key-value for fast read operations.
+            required. Additionally, write operation is only done maybe once a month. Reddis might be best since it utalizes key-value for fast read operations. 
 
 Caching := We can utalize caching between the service and database layer such that the service first checks for cache
             then proceeds to database if no cache found. 
