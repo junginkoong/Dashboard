@@ -4,14 +4,6 @@ from datetime import datetime, timedelta
 from django.http import JsonResponse
 from redis_client import redis_client
 
-def connection():
-    return redis.Redis(
-        host='localhost',
-        port=6379,
-        db=0,
-        decode_responses=True
-    )
-
 ALLOWED_CURRENCIES = ['CAD', 'USD', 'EUR']
 DEFAULT_BASE_CURRENCY = 'USD'
 YEAR_RANGE = 2
